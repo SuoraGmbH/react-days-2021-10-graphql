@@ -29,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "backend": "node server/index.js",
-    "graphql:codegen": "graphql-codegen --config codegen.yml"
+    "graphql:codegen": "graphql-codegen --config codegen.yml",
+    "graphql:codegen:watch": "graphql-codegen --config codegen.yml --watch"
   },
   "eslintConfig": {
     "extends": [
