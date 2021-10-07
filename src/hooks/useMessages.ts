@@ -9,10 +9,9 @@ gql`
   }
 `;
 
-
 interface NewMessage {
-  authorId: string
-  text: string
+  authorId: string;
+  text: string;
 }
 
 interface Person {
@@ -47,7 +46,7 @@ const useMessages = () => {
   ]);
 
   const sendMessage = (message: NewMessage): void => {
-    setMessages(previousMessages => ([
+    setMessages((previousMessages) => [
       ...previousMessages,
       {
         id: Date.now().toString(),
@@ -57,7 +56,7 @@ const useMessages = () => {
           lastName: "Krausenbaum",
         },
       },
-    ]));
+    ]);
   };
 
   return {
