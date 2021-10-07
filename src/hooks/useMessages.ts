@@ -44,27 +44,7 @@ export interface Message {
 }
 
 const useMessages = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "message-1",
-      text: "Hello there, this is a test message.",
-      author: {
-        firstName: "Jan",
-        lastName: "Krausenbaum",
-      },
-    },
-    {
-      id: "message-2",
-      text: "Hey, this is a second test message.",
-      author: {
-        firstName: "Florian",
-        lastName: "Sowade",
-      },
-    },
-  ]);
-
   const { data } = useAllMessagesQuery();
-  console.log(data?.messages);
   const [sendMessageMutation] = useSendMessageMutation({
     refetchQueries: ["AllMessages"],
   });
