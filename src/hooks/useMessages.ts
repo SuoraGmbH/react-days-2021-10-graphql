@@ -64,8 +64,10 @@ const useMessages = () => {
   ]);
 
   const { data } = useAllMessagesQuery();
-  const [sendMessageMutation, { error }] = useSendMessageMutation();
   console.log(data?.messages);
+  const [sendMessageMutation] = useSendMessageMutation({
+    refetchQueries: ["AllMessages"],
+  });
 
   const sendMessage = (message: NewMessage): void => {
     sendMessageMutation({
