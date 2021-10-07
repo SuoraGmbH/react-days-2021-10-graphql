@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { gql } from "@apollo/client";
-import { useAllMessagesQuery } from "../generated/graphql";
+import {
+  useAllMessagesQuery,
+  useSendMessageMutation,
+} from "../generated/graphql";
 
 gql`
   query AllMessages {
@@ -12,6 +15,14 @@ gql`
         firstName
         lastName
       }
+    }
+  }
+`;
+
+gql`
+  mutation SendMessage($text: String!, $authorId: ID!) {
+    sendMessage(text: $text, authorId: $authorId) {
+      id
     }
   }
 `;
@@ -53,20 +64,13 @@ const useMessages = () => {
   ]);
 
   const { data } = useAllMessagesQuery();
+  const [sendMessageMutation, { error }] = useSendMessageMutation();
   console.log(data?.messages);
 
   const sendMessage = (message: NewMessage): void => {
-    setMessages((previousMessages) => [
-      ...previousMessages,
-      {
-        id: Date.now().toString(),
-        text: message.text,
-        author: {
-          firstName: "Jan",
-          lastName: "Krausenbaum",
-        },
-      },
-    ]);
+    sendMessageMutation({
+      variables: { authorId: message.authorId, text: message.text },
+    });
   };
 
   return {
