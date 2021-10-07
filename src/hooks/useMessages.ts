@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { gql } from "@apollo/client";
+import { useAllMessagesQuery } from "../generated/graphql";
 
 gql`
   query AllMessages {
     messages {
       id
+      text
+      createdAt
+      author {
+        firstName
+        lastName
+      }
     }
   }
 `;
@@ -44,6 +51,9 @@ const useMessages = () => {
       },
     },
   ]);
+
+  const { data } = useAllMessagesQuery();
+  console.log(data?.messages);
 
   const sendMessage = (message: NewMessage): void => {
     setMessages((previousMessages) => [

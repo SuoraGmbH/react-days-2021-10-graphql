@@ -89,7 +89,11 @@ export type AllMessagesQuery = (
   { __typename?: 'Query' }
   & { messages: Array<(
     { __typename?: 'Message' }
-    & Pick<Message, 'id'>
+    & Pick<Message, 'id' | 'text' | 'createdAt'>
+    & { author: (
+      { __typename?: 'Person' }
+      & Pick<Person, 'firstName' | 'lastName'>
+    ) }
   )> }
 );
 
@@ -98,6 +102,12 @@ export const AllMessagesDocument = gql`
     query AllMessages {
   messages {
     id
+    text
+    createdAt
+    author {
+      firstName
+      lastName
+    }
   }
 }
     `;
