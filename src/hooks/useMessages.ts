@@ -70,7 +70,7 @@ const useMessages = () => {
   };
 
   return {
-    messages,
+    messages: data ? data.messages : [],
     sendMessage,
   };
 };
